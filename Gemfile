@@ -46,3 +46,5 @@ else
   end
 end
 # END ENGINE_CART BLOCK
+
+gem 'storage_proxy_api', github: 'samvera-labs/storage_proxy_api'
