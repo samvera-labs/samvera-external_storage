@@ -14,6 +14,10 @@ module ExternalStorage
       external_file_service.stage(service: external_file_uri_service, external_uri: external_file_uri_filename)
     end
 
+    def external_file_service_up?
+      external_file_status.up?
+    end
+
     def external_file_staged?
       return false unless external_file?
       external_file_status.staged?

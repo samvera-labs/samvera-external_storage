@@ -1,7 +1,10 @@
 en:
-  file_set:
-    show:
-      download_stage: "Stage the Download"
-      download_staged: "Download is ready"
-      download_staging: "Download is staging"
-      download_requires_staging: "Download requires staging"
+  hyrax:
+    file_set:
+      show:
+        external_storage:
+          unavailable: "External storage service is unavailable"
+          download_stage: "Stage the Download"
+          download_staged: "Download is ready"
+          download_staging: "Download is staging"
+          download_requires_staging: "Download requires staging"
