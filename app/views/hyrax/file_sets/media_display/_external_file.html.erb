@@ -15,10 +15,10 @@
     class: "btn btn-default",
     disabled: !file_set.external_file_staged? %>
   <%= link_to t('hyrax.file_set.show.external_storage.download_stage'),
-    '', # main_app.stage_external_file_path(file_set.id), # TODO Fix loading of route
+    external_storage_engine.stage_external_file_path(file_set.id),
     id: "file_download_stage",
     data: { label: file_set.id },
-    target: "_new",
+    method: :post,
     class: "btn btn-default",
     disabled: file_set.external_file_staged? || file_set.external_file_staging? %>
 <% else %>

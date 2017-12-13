@@ -1,3 +1,5 @@
+require 'external_storage/config'
+
 module ExternalStorage
   module ExternalStorageBehavior
     extend ActiveSupport::Concern
@@ -6,12 +8,16 @@ module ExternalStorage
       !external_file_uri.blank?
     end
 
+    def external_file_uri_file_path
+      external_file_uri.path.split('/')[-1]
+    end
+
     def external_file_status
-      @external_file_status ||= external_file_service.status(service: external_file_uri_service, external_uri: external_file_uri_filename)
+      @external_file_status ||= external_file_service.status(service: external_file_uri_service, external_uri: external_file_uri_file_path)
     end
 
     def external_file_stage
-      external_file_service.stage(service: external_file_uri_service, external_uri: external_file_uri_filename)
+      external_file_service.stage(service: external_file_uri_service, external_uri: external_file_uri_file_path)
     end
 
     def external_file_service_up?
@@ -42,15 +48,16 @@ module ExternalStorage
     end
 
     def external_file_uri_service
-      external_file_uri.path.split('/')[1]
-    end
-
-    def external_file_uri_filename
-      external_file_uri.path.split('/')[-1]
+      'sda' # FIXME remove when proxy backend is updated
+      # external_file_uri.path.split('/')[1]
     end
 
     def external_file_service
-      @external_file_service ||= ::StorageProxyAPI::Client.new(base_url: 'http://localhost:8080' || external_file_uri)
+      @external_file_service ||= ::StorageProxyAPI::Client.new(base_url: external_file_service_config)
+    end
+
+    def external_file_service_config
+      ExternalStorage::Config.config.host
     end
   end
 end

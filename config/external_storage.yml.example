@@ -1,0 +1,15 @@
+development:
+  external_uri_host: http://localhost/dev/archive
+  enabled: true
+  host: http://localhost:8080/
+  service: archive
+test:
+  external_uri_host: http://localhost/test/archive
+  enabled: false
+  host: http://localhost:8080/
+  service: archive
+production:
+  external_uri_host: http://localhost/preserve/archive
+  enabled: false
+  host: http://localhost:8080/
+  service: archive
